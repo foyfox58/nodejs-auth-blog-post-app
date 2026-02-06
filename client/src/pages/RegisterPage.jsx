@@ -1,15 +1,25 @@
 import { useState } from "react";
+import { useAuth } from "../contexts/authentication";
+
 
 function RegisterPage() {
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const { register } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // 🐨 Todo: Exercise #2
     // นำ Function `register` ใน AuthContext มา Execute ใน Event Handler ตรงนี้
+    const data = {
+      username,
+      password,
+      firstName,
+      lastName,
+    };
+    register(data);
   };
 
   return (
@@ -37,7 +47,7 @@ function RegisterPage() {
             <input
               id="password"
               name="password"
-              type="text"
+              type="password"
               placeholder="Enter password here"
               onChange={(event) => {
                 setPassword(event.target.value);
